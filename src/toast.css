@@ -1,0 +1,91 @@
+/* .example-component {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  height: 100px;
+  background-color: aqua;
+}
+
+.example-component span {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background: rgb(0, 255, 127);
+  animation: anim 5s linear forwards;
+}
+
+@keyframes anim {
+  100% {
+    width: 0;
+  }
+} */
+
+#toastBox {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.toast {
+  width: 400px;
+  height: 80px;
+  background: #fff;
+  font-weight: 500;
+  margin: 15px 0 15px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.toast .mt {
+  margin-top: 31px;
+}
+
+@keyframes moveleft {
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.success {
+  width: 100%;
+  height: 5px;
+  background: rgb(0, 255, 127);
+  animation: anim 2.5s linear forwards;
+  border-radius: 10px;
+}
+@keyframes anim {
+  100% {
+    width: 0;
+  }
+}
+
+.error {
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  background: rgb(255, 69, 0);
+  animation: anim 2.5s linear forwards;
+}
+.warning {
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  background: rgb(218, 165, 32);
+  animation: anim 2.5s linear forwards;
+}
+.icon {
+  margin: 0 5px;
+}
