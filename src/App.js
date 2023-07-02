@@ -1,5 +1,5 @@
 import Action from "./Action";
-import { Toastify } from "./Toastify";
+import Toastify from "./Toastify";
 function App() {
   return (
     <>

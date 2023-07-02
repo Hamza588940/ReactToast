@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./toast.css";
 
-export const Toastify = ({ message, type }) => {
+const Toastify = ({ message, type }) => {
   const [alertType, setAlertType] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const timeoutIdRef = useRef(null);
@@ -9,12 +9,9 @@ export const Toastify = ({ message, type }) => {
   useEffect(() => {
     if (type === "success") {
       setAlertType("success");
-    }
-    if (type === "warning") {
+    } else if (type === "warning") {
       setAlertType("warning");
-    }
-
-    if (type === "error") {
+    } else if (type === "error") {
       setAlertType("error");
     }
   }, [type]);
@@ -22,7 +19,7 @@ export const Toastify = ({ message, type }) => {
   useEffect(() => {
     if (alertType) {
       timeoutIdRef.current = setTimeout(() => {
-        setAlertType(null);
+        setAlertType("");
         setIsHovered(false);
       }, 2500);
       return () => clearTimeout(timeoutIdRef.current);
@@ -32,77 +29,85 @@ export const Toastify = ({ message, type }) => {
   const handleMouseEnter = () => {
     setIsHovered(true);
     clearTimeout(timeoutIdRef.current);
+    const elements = document.getElementsByClassName(alertType);
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      element.style.animationPlayState = "paused";
+    }
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-
     timeoutIdRef.current = setTimeout(() => {
-      setAlertType(null);
+      setAlertType("");
     }, 2500);
+    const elements = document.getElementsByClassName(alertType);
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      element.style.animationPlayState = "running";
+    }
   };
 
   return (
-    <>
-      <div>
-        <div className="toastBox">
-          {alertType === "success" && (
-            <div
-              className="toast "
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="mt">
-                <i className="fa-solid fa-circle-check icon"></i>
-                {message}
-              </div>
-
-              <span
-                className="success"
-                style={{
-                  animationPlayState: isHovered ? "paused" : "running",
-                }}
-              ></span>
+    <div>
+      <div className="toastBox">
+        {alertType === "success" && (
+          <div
+            className="toast"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="mt">
+              <i className="fa-solid fa-circle-check icon"></i>
+              {message}
             </div>
-          )}
-          {alertType === "warning" && (
-            <div
-              className="toast"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="mt">
-                <i className="fa-solid fa-circle-xmark icon"></i>
-                {message}
-              </div>
-              <span
-                className="warning"
-                style={{
-                  animationPlayState: isHovered ? "paused" : "running",
-                }}
-              ></span>
+            <span
+              className="success"
+              style={{
+                animationPlayState: isHovered ? "paused" : "running",
+              }}
+            ></span>
+          </div>
+        )}
+        {alertType === "warning" && (
+          <div
+            className="toast"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="mt">
+              <i className="fa-solid fa-circle-xmark icon"></i>
+              {message}
             </div>
-          )}
-          {alertType === "error" && (
-            <div
-              className="toast"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="mt">
-                <i className="fa-solid fa-circle-exclamation icon"></i>
-                {message}
-              </div>
-              <span
-                className="error"
-                style={{
-                  animationPlayState: isHovered ? "paused" : "running",
-                }}
-              ></span>
+            <span
+              className="warning"
+              style={{
+                animationPlayState: isHovered ? "paused" : "running",
+              }}
+            ></span>
+          </div>
+        )}
+        {alertType === "error" && (
+          <div
+            className="toast"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="mt">
+              <i className="fa-solid fa-circle-exclamation icon"></i>
+              {message}
             </div>
-          )}
-        </div>
+            <span
+              className="error"
+              style={{
+                animationPlayState: isHovered ? "paused" : "running",
+              }}
+            ></span>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
+
+export default Toastify;

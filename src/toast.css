@@ -1,28 +1,3 @@
-/* .example-component {
-  position: relative;
-  display: inline-block;
-  width: 400px;
-  height: 100px;
-  background-color: aqua;
-}
-
-.example-component span {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 5px;
-  background: rgb(0, 255, 127);
-  animation: anim 5s linear forwards;
-}
-
-@keyframes anim {
-  100% {
-    width: 0;
-  }
-} */
-
 #toastBox {
   position: absolute;
   top: 30px;
@@ -67,6 +42,9 @@
   border-radius: 10px;
 }
 @keyframes anim {
+  0% {
+    width: 100%;
+  }
   100% {
     width: 0;
   }
